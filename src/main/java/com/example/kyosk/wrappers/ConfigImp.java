@@ -11,4 +11,5 @@ public interface ConfigImp {
     MainConfig create(MainConfig config);
     List<MainConfig> getConfigs();
     MainConfig getConfigByName(String name);
+    String deleteByName(String name);
 }

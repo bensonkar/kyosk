@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ConfigRepository extends JpaRepository<MainConfig, Long> {
+    MainConfig findByName(String name);
+    MainConfig deleteByName(String name);
+
 }

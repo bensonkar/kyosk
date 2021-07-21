@@ -37,6 +37,23 @@ public class ConfigService implements ConfigImp {
 
     @Override
     public MainConfig getConfigByName(String name) {
-        return null;
+        try {
+            return configRepository.findByName(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String deleteByName(String name) {
+        try {
+            Long id = getConfigByName(name).getId();
+            configRepository.deleteById(id);
+            return "record deleted";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "record failed to delete";
+        }
     }
 }

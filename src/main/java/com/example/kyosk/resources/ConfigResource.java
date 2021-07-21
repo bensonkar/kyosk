@@ -7,10 +7,8 @@ import com.example.kyosk.repositories.MetaDataRepository;
 import com.example.kyosk.repositories.MonitoringRepository;
 import com.example.kyosk.wrappers.ConfigImp;
 import com.example.kyosk.wrappers.ConfigWrapper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -87,5 +85,15 @@ public class ConfigResource {
         config.setMetadata(metadata);
          config = configImp.create(config);
          return config;
+    }
+
+    @GetMapping("/configs/{name}")
+    public MainConfig getConfigByName(@PathVariable String name) {
+        return configImp.getConfigByName(name);
+    }
+
+    @DeleteMapping("/configs/{name}")
+    public String deleteByName(@PathVariable String name){
+        return configImp.deleteByName(name);
     }
 }
