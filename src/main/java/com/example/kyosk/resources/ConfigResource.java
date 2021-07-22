@@ -63,8 +63,8 @@ public class ConfigResource {
     }
 
     @GetMapping("/configs")
-    public List<MainConfig> all() {
-        return configImp.getConfigs();
+    public ResponseEntity<List<MainConfig>> all() {
+        return ResponseEntity.ok(configImp.getConfigs());
     }
 
     @PostMapping("/configs")
