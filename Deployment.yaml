@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kyosk
+  name: kyosk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kyosk
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kyosk
+    spec:
+      hostNetwork: true
+      containers:
+        - image: docker.io/benkash/kyosk:0.001
+          name: kyosk-api
+          resources: {}
+#          volumeMounts:
+#            - name: logs
+#              mountPath: "/logs"
+#      volumes:
+#        - name: logs
+#          hostPath:
+#            path: "/opt/frontend/logs"
+#            type: DirectoryOrCreate
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kyosk-service
+  name: kyosk-service
+spec:
+  ports:
+    - name: 8089-8089
+      port: 8089
+      protocol: TCP
+      targetPort: 8089
+  selector:
+    app: kyosk-service
+  type: ClusterIP
+status:
+  loadBalancer: {}
